@@ -291,6 +291,10 @@ static ARAutocompleteManager *sharedManager;
         NSString *stringToLookFor;
 		NSArray *componentsString = [prefix componentsSeparatedByString:@","];
         NSString *prefixLastComponent = [componentsString.lastObject stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if (componentsString.count > 1 && [componentsString.lastObject isEqualToString:@""]) {
+            componentsString = [NSMutableArray arrayWithArray:componentsString];
+            [(NSMutableArray*)componentsString removeLastObject];
+        }
         if (ignoreCase)
         {
             stringToLookFor = [prefixLastComponent lowercaseString];
